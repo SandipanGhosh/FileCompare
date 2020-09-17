@@ -1,0 +1,56 @@
+{
+    "Mode": 1,
+    "RootPath": "C:/Sandipan/Development/FileCompare/Documents/",
+    "ReportPath": "C:/Sandipan/Development/FileCompare/Documents/Reports/",
+    "LogPath": "C:/Sandipan/Development/FileCompare/Documents/Log/",
+    "LogName": "FileCompare.log",
+    "Directory1": "C:/Sandipan/Development/FileCompare/Documents/Test1",
+    "Directory2": "C:/Sandipan/Development/FileCompare/Documents/Test2",
+    "PdfCompareSet": [
+        {
+            "file1": "testpdf1.pdf",
+            "file2": "testpdf2.pdf"
+        },
+        {
+            "file1": "testpdf3.pdf",
+            "file2": "testpdf4.pdf"
+        }
+    ],
+    "DocCompareSet": [
+        {
+            "file1": "testdoc1.docx",
+            "file2": "testdoc2.docx"
+        }
+    ],
+    "PdfSearchSet": [
+        {
+            "searchFile": [ "testpdf1.pdf" ],
+            "searchTexts": [
+                "Continuous",
+                "Delivery",
+                "Integration"
+            ]
+        },
+        {
+            "searchFile": [ "testpdf2.pdf" ],
+            "searchTexts": [
+                "the",
+                "CI/CD"
+            ]
+        }
+    ],
+    "DocSearchSet": [
+        {
+            "searchFile": [ "testdoc1.docx" ],
+            "searchTexts": [
+                "Point"
+            ]
+        },
+        {
+            "searchFile": [ "testdoc2.docx" ],
+            "searchTexts": [
+                "Point"
+            ]
+        }
+    ]
+}
