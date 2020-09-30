@@ -77,7 +77,7 @@ namespace FileCompare
             foreach (var v in queryList2Only)
             {
                 Logger.Info(string.Format("QueryCompareDirs::CompareDirectories - {0}", v.FullName));
-            }         
+            }          
         }
     }
 }
