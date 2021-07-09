@@ -14,7 +14,7 @@ namespace FileCompare
         public static void InitializeLogger(string logFilePath)
         {
             ILoggerRepository repository = log4net.LogManager.GetRepository(Assembly.GetCallingAssembly());
-            var fileInfo = new FileInfo(@"App.config");
+            var fileInfo = new FileInfo(@"app.config");
             log4net.GlobalContext.Properties["LogFileName"] = logFilePath;
             log4net.Config.XmlConfigurator.Configure(repository, fileInfo);
         }

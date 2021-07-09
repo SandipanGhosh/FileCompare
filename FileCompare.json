@@ -1,11 +1,11 @@
 {
     "Mode": 1,
-    "RootPath": "C:/Sandipan/Development/FileCompare/Documents/",
-    "ReportPath": "C:/Sandipan/Development/FileCompare/Documents/Reports/",
-    "LogPath": "C:/Sandipan/Development/FileCompare/Documents/Log/",
+    "RootPath": "C:/Sandipan/Truist/Projects/Development/Test/",
+    "ReportPath": "C:/Sandipan/Truist/Projects/Development/Test/Reports",
+    "LogPath": "C:/Sandipan/Truist/Projects/Development/Test/Log/",
     "LogName": "FileCompare.log",
-    "Directory1": "C:/Sandipan/Development/FileCompare/Documents/Test1",
-    "Directory2": "C:/Sandipan/Development/FileCompare/Documents/Test2",
+    "Directory1": "C:/Sandipan/Truist/Projects/Development/Test/Test1",
+    "Directory2": "C:/Sandipan/Truist/Projects/Development/Test/Test2",
     "PdfCompareSet": [
         {
             "file1": "testpdf1.pdf",
@@ -24,18 +24,14 @@
     ],
     "PdfSearchSet": [
         {
-            "searchFile": [ "testpdf1.pdf" ],
+            "searchFile": [ "EBX003.pdf" ],
             "searchTexts": [
-                "Continuous",
-                "Delivery",
-                "Integration"
-            ]
-        },
-        {
-            "searchFile": [ "testpdf2.pdf" ],
-            "searchTexts": [
-                "the",
-                "CI/CD"
+                "Atlanta",
+                "Truist"
+            ],
+            "exceptions": [
+                "BB&T",
+                "SUNTRUST"
             ]
         }
     ],
@@ -44,12 +40,18 @@
             "searchFile": [ "testdoc1.docx" ],
             "searchTexts": [
                 "Point"
+            ],
+            "exceptions": [
+                "BBT"
             ]
         },
         {
             "searchFile": [ "testdoc2.docx" ],
             "searchTexts": [
                 "Point"
+            ],
+            "exceptions": [
+                "BBT"
             ]
         }
     ]

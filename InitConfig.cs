@@ -59,7 +59,7 @@ namespace FileCompare
             // Validate directory search params
             if (Mode == 0)
             {
-                if (!Directory.Exists(Directory1) || Directory.Exists(Directory2))
+                if (!Directory.Exists(Directory1) || !Directory.Exists(Directory2))
                 {
                     //Logger.Error("InitConfig::ValidateConfigParams - Directory validation failed! Either of the directories does not exist.");
                     return false;
@@ -82,9 +82,9 @@ namespace FileCompare
                     for (int i = 0; i < PdfSearchSet.Count; i++)
                     {
                         dict = PdfSearchSet[i];
-                        if ((dict["searchFile"].Count == 0) || (dict["searchTexts"].Count == 0))
+                        if ((dict["searchFile"].Count == 0) || ((dict["searchTexts"].Count == 0) && (dict["exceptions"].Count == 0)))
                         {
-                            //Logger.Error("InitConfig::ValidateConfigParams - PdfSearchSet validation failed! Either of search file or search text is empty!");
+                            //Logger.Error("InitConfig::ValidateConfigParams - Either of search file or search text and exception list is empty!");
                             return false;
                         }
                     }
@@ -97,9 +97,9 @@ namespace FileCompare
                     for (int i = 0; i < DocSearchSet.Count; i++)
                     {
                         dict = DocSearchSet[i];
-                        if ((dict["searchFile"].Count == 0) || (dict["searchTexts"].Count == 0))
+                        if ((dict["searchFile"].Count == 0) || ((dict["searchTexts"].Count == 0) && (dict["exceptions"].Count == 0)))
                         {
-                            //Logger.Error("InitConfig::ValidateConfigParams - DocSearchSet validation failed! Either of search file or search text is empty!");
+                            //Logger.Error("InitConfig::ValidateConfigParams - Either of search file or search text and exception list is empty!");
                             return false;
                         }
                     }

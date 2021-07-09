@@ -30,7 +30,7 @@ namespace FileCompare
             DirectoryCompare myFileCompare = new DirectoryCompare();
 
             // This query determines whether the two folders contain identical file lists,
-            // based on the custom file comparer that is defined in the FileComparer class.
+            // based on the custom file comparer that is defined in the FileCompare class.
             // The query executes immediately because it returns a bool.
             bool areIdentical = list1.SequenceEqual(list2, myFileCompare);
 

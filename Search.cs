@@ -95,11 +95,11 @@ namespace FileCompare
                     reportText += "<body>";
                     reportText += "<h2>FileCompare - Global Search Exception Report</h2>";
                     reportText += "<table table-layout: fixed; border-collapse: collapse; border: 3px solid black;><tr><th>File</th><th>Page Numbers</th></tr>";
-                    reportText += GlobalExcpetionReportText;
+                    reportText += GlobalExceptionReportText;
                     reportText += "</body></html>";
 
                     sw.WriteLine(reportText);
-                    GlobalExcpetionReportText = "";
+                    GlobalExceptionReportText = "";
                 }
             }
             catch (Exception ex)

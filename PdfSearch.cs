@@ -12,10 +12,11 @@ namespace FileCompare
 {
     public class PdfSearch : Search
     {
-        public PdfSearch(String filePath, List<string> searchTexts, string reportPath)
+        public PdfSearch(String filePath, List<string> searchTexts, List<string> exceptions, string reportPath)
         {
             FilePath = filePath;
             SearchTexts = searchTexts;
+            Exceptions = exceptions;
             ReportPath = reportPath;
         }
 
@@ -29,21 +30,69 @@ namespace FileCompare
 
             PdfDocument document = new PdfDocument(new PdfReader(FilePath));
             int totalPageCount = document.GetNumberOfPages();
-            var currentText = new System.Text.StringBuilder();
+            var pageText = new System.Text.StringBuilder();
+
+            List<int> searchPageList = new List<int>();
+            List<int> exceptionPageList = new List<int>();
+          
             for (int i = 1; i <= totalPageCount; i++)
             {
                 ITextExtractionStrategy textExtractionStrategy = new SimpleTextExtractionStrategy();
                 PdfPage page = document.GetPage(i);
-                currentText.AppendLine(PdfTextExtractor.GetTextFromPage(page, textExtractionStrategy));
+                pageText.AppendLine(PdfTextExtractor.GetTextFromPage(page, textExtractionStrategy));
+
+                // Search for patterns in this page.
+                if (SearchTexts.Count > 0)
+                {
+                    Dictionary<string, int> dSearchPatterns = new Dictionary<string, int>();
+                    int searchCount = 0;
+                    Console.WriteLine("PageText = " + pageText);
+                    foreach (string searchText in SearchTexts)
+                    {
+                        searchCount = Regex.Matches(pageText.ToString(), searchText).Count;
+                        dSearchPatterns.Add(searchText, searchCount);
+
+                        // If we have a match from the search set then add the page number.
+                        if (searchCount > 0)
+                        {
+                            searchPageList.Add(i);
+                        }
+                    }
+
+                    // Build the individual report text for this page.
+                    SearchReportTextBuilder(dSearchPatterns, i);
+                }
+
+                // Search for exception patterns in this page.
+                if (Exceptions.Count > 0)
+                {
+                    Dictionary<string, int> dExceptions = new Dictionary<string, int>();
+                    int excCount = 0;
+
+                    foreach (string exception in Exceptions)
+                    {
+                        excCount = Regex.Matches(pageText.ToString(), exception).Count;
+                        dExceptions.Add(exception, excCount);
+
+                        // If we have a match from the search set then add the page number.
+                        if (excCount > 0)
+                        {
+                            exceptionPageList.Add(i);
+                        }
+                    }
+
+                    // Build the individual report text for this page.
+                    ExceptionReportTextBuilder(dExceptions, i);
+                }
             }
 
-            Dictionary<string, int> dSearchPatterns = new Dictionary<string, int>();
-            foreach (string searchText in SearchTexts)
-            {
-                dSearchPatterns.Add(searchText, Regex.Matches(currentText.ToString(), searchText).Count);
-            }
+            // Generate the individual reports for this file.
+            GenerateSearchReports();
+            GenerateExceptionReports();
 
-            GenerateSearchReport(dSearchPatterns);
+            // Build the global report texts for this file.
+            GlobalSearchReportTextBuilder(searchPageList);
+            GlobalExceptionReportTextBuilder(exceptionPageList);
         }
     }
 }
